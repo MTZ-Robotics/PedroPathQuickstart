@@ -10,16 +10,16 @@ import com.pedropathing.localization.constants.DriveEncoderConstants;
 
 public class LConstants_PushBot {
     static {
-        DriveEncoderConstants.forwardTicksToInches = ticksPerInchWheelDrive;
-        DriveEncoderConstants.strafeTicksToInches = ticksPerInchWheelStrafe;
-        DriveEncoderConstants.turnTicksToInches = ticksPerDegreeTurnChassis;
+        DriveEncoderConstants.forwardTicksToInches = 1/ticksPerInchWheelDrive;
+        DriveEncoderConstants.strafeTicksToInches = 1/ticksPerInchWheelStrafe;
+        DriveEncoderConstants.turnTicksToInches = 1/ticksPerDegreeTurnChassis;
 
         DriveEncoderConstants.robot_Width = 12;
         DriveEncoderConstants.robot_Length = 7.56;
 
-        DriveEncoderConstants.leftFrontEncoderDirection = Encoder.FORWARD;
+        DriveEncoderConstants.leftFrontEncoderDirection = Encoder.REVERSE;
         DriveEncoderConstants.rightFrontEncoderDirection = Encoder.REVERSE;
-        DriveEncoderConstants.leftRearEncoderDirection = Encoder.REVERSE;
+        DriveEncoderConstants.leftRearEncoderDirection = Encoder.FORWARD;
         DriveEncoderConstants.rightRearEncoderDirection = Encoder.FORWARD;
     }
 }
