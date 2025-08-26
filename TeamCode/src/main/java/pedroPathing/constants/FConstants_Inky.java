@@ -1,26 +1,28 @@
 package pedroPathing.constants;
 
-import com.pedropathing.localization.Localizers;
 import com.pedropathing.follower.FollowerConstants;
-import com.pedropathing.util.CustomFilteredPIDFCoefficients;
-import com.pedropathing.util.CustomPIDFCoefficients;
+import com.pedropathing.localization.Localizers;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-public class FConstants {
+public class FConstants_Inky {
     static {
-        FollowerConstants.localizers = Localizers.THREE_WHEEL_IMU;
+        FollowerConstants.localizers = Localizers.DRIVE_ENCODERS;
 
-        FollowerConstants.leftFrontMotorName = "leftFront";
-        FollowerConstants.leftRearMotorName = "leftRear";
-        FollowerConstants.rightFrontMotorName = "rightFront";
-        FollowerConstants.rightRearMotorName = "rightRear";
+        FollowerConstants.leftFrontMotorName = "frontLeft";
+        FollowerConstants.leftRearMotorName = "backLeft";
+        FollowerConstants.rightFrontMotorName = "frontRight";
+        FollowerConstants.rightRearMotorName = "backRight";
 
-        FollowerConstants.leftFrontMotorDirection = DcMotorSimple.Direction.REVERSE;
+        //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        // PushBot Needs Front Right & Back Left reversed
+        // rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        FollowerConstants.leftFrontMotorDirection = DcMotorSimple.Direction.FORWARD;
         FollowerConstants.leftRearMotorDirection = DcMotorSimple.Direction.REVERSE;
-        FollowerConstants.rightFrontMotorDirection = DcMotorSimple.Direction.FORWARD;
+        FollowerConstants.rightFrontMotorDirection = DcMotorSimple.Direction.REVERSE;
         FollowerConstants.rightRearMotorDirection = DcMotorSimple.Direction.FORWARD;
 
-        FollowerConstants.mass = 5.897;
+        FollowerConstants.mass = 7;
 
         FollowerConstants.xMovement = 57.8741;
         FollowerConstants.yMovement = 52.295;

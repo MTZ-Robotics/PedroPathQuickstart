@@ -1,5 +1,6 @@
 package pedroPathing.tuners_tests.automatic;
 
+
 import static com.pedropathing.follower.FollowerConstants.leftFrontMotorDirection;
 import static com.pedropathing.follower.FollowerConstants.leftFrontMotorName;
 import static com.pedropathing.follower.FollowerConstants.leftRearMotorDirection;
@@ -32,11 +33,11 @@ import pedroPathing.constants.FConstants_PushBot;
 import pedroPathing.constants.LConstants_PushBot;
 
 /**
- * This is the ForwardVelocityTuner autonomous follower OpMode. This runs the robot forwards at max
+ * This is the StrafeVelocityTuner autonomous follower OpMode. This runs the robot right at max
  * power until it reaches some specified distance. It records the most recent velocities, and on
  * reaching the end of the distance, it averages them and prints out the velocity obtained. It is
  * recommended to run this multiple times on a full battery to get the best results. What this does
- * is, when paired with StrafeVelocityTuner, allows FollowerConstants to create a Vector that
+ * is, when paired with ForwardVelocityTuner, allows FollowerConstants to create a Vector that
  * empirically represents the direction your mecanum wheels actually prefer to go in, allowing for
  * more accurate following.
  * You can adjust the distance the robot will travel on FTC Dashboard: 192/168/43/1:8080/dash
@@ -47,14 +48,14 @@ import pedroPathing.constants.LConstants_PushBot;
  * @version 1.0, 3/13/2024
  */
 @Config
-@Autonomous(name = "PushBot Forward Velocity Tuner", group = "Automatic Tuners")
-public class ForwardVelocityTuner_PushBot extends OpMode {
+@Autonomous(name = "Inky Strafe Velocity Tuner", group = "Automatic Tuners")
+public class StrafeVelocityTuner_Inky extends OpMode {
     private ArrayList<Double> velocities = new ArrayList<>();
 
-    private DcMotorEx FL;
-    private DcMotorEx BL;
-    private DcMotorEx FR;
-    private DcMotorEx BR;
+    private DcMotorEx leftFront;
+    private DcMotorEx leftRear;
+    private DcMotorEx rightFront;
+    private DcMotorEx rightRear;
     private List<DcMotorEx> motors;
 
     private PoseUpdater poseUpdater;
@@ -75,16 +76,16 @@ public class ForwardVelocityTuner_PushBot extends OpMode {
         Constants.setConstants(FConstants_PushBot.class, LConstants_PushBot.class);
         poseUpdater = new PoseUpdater(hardwareMap);
 
-        FL = hardwareMap.get(DcMotorEx.class, leftFrontMotorName);
-        BL = hardwareMap.get(DcMotorEx.class, leftRearMotorName);
-        BR = hardwareMap.get(DcMotorEx.class, rightRearMotorName);
-        FR = hardwareMap.get(DcMotorEx.class, rightFrontMotorName);
-        FL.setDirection(leftFrontMotorDirection);
-        BL.setDirection(leftRearMotorDirection);
-        FR.setDirection(rightFrontMotorDirection);
-        BR.setDirection(rightRearMotorDirection);
+        leftFront = hardwareMap.get(DcMotorEx.class, leftFrontMotorName);
+        leftRear = hardwareMap.get(DcMotorEx.class, leftRearMotorName);
+        rightRear = hardwareMap.get(DcMotorEx.class, rightRearMotorName);
+        rightFront = hardwareMap.get(DcMotorEx.class, rightFrontMotorName);
+        leftFront.setDirection(leftFrontMotorDirection);
+        leftRear.setDirection(leftRearMotorDirection);
+        rightFront.setDirection(rightFrontMotorDirection);
+        rightRear.setDirection(rightRearMotorDirection);
 
-        motors = Arrays.asList(FL, BL, FR, BR);
+        motors = Arrays.asList(leftFront, leftRear, rightFront, rightRear);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -101,31 +102,28 @@ public class ForwardVelocityTuner_PushBot extends OpMode {
         }
 
         telemetryA = new MultipleTelemetry(this.telemetry, FtcDashboard.getInstance().getTelemetry());
-        telemetryA.addLine("The robot will run at 1 power until it reaches " + DISTANCE + " inches forward.");
+        telemetryA.addLine("The robot will run at 1 power until it reaches " + DISTANCE + " inches to the right.");
         telemetryA.addLine("Make sure you have enough room, since the robot has inertia after cutting power.");
-        telemetryA.addLine("After running the distance, the robot will cut power from the drivetrain and display the forward velocity.");
+        telemetryA.addLine("After running the distance, the robot will cut power from the drivetrain and display the strafe velocity.");
         telemetryA.addLine("Press CROSS or A on game pad 1 to stop.");
-        telemetryA.addData("pose", poseUpdater.getPose());
         telemetryA.update();
-
     }
 
     /**
-     * This starts the OpMode by setting the drive motors to run forward at full power.
+     * This starts the OpMode by setting the drive motors to run right at full power.
      */
     @Override
     public void start() {
-        FL.setPower(1);
-        BL.setPower(1);
-        FR.setPower(1);
-        BR.setPower(1);
-        end = false;
+        leftFront.setPower(1);
+        leftRear.setPower(-1);
+        rightFront.setPower(-1);
+        rightRear.setPower(1);
     }
 
     /**
      * This runs the OpMode. At any point during the running of the OpMode, pressing CROSS or A on
-     * game pad 1 will stop the OpMode. This continuously records the RECORD_NUMBER most recent
-     * velocities, and when the robot has run forward enough, these last velocities recorded are
+     * game pad1 will stop the OpMode. This continuously records the RECORD_NUMBER most recent
+     * velocities, and when the robot has run sideways enough, these last velocities recorded are
      * averaged and printed.
      */
     @Override
@@ -140,22 +138,22 @@ public class ForwardVelocityTuner_PushBot extends OpMode {
 
         poseUpdater.update();
         if (!end) {
-            if (Math.abs(poseUpdater.getPose().getX()) > DISTANCE) {
+            if (Math.abs(poseUpdater.getPose().getY()) > DISTANCE) {
                 end = true;
                 for (DcMotorEx motor : motors) {
                     motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
                     motor.setPower(0);
                 }
             } else {
-                double currentVelocity = Math.abs(MathFunctions.dotProduct(poseUpdater.getVelocity(), new Vector(1, 0)));
+                double currentVelocity = Math.abs(MathFunctions.dotProduct(poseUpdater.getVelocity(), new Vector(1, Math.PI / 2)));
                 velocities.add(currentVelocity);
                 velocities.remove(0);
             }
         } else {
-            FL.setPower(0);
-            BL.setPower(0);
-            FR.setPower(0);
-            BR.setPower(0);
+            leftFront.setPower(0);
+            leftRear.setPower(0);
+            rightFront.setPower(0);
+            rightRear.setPower(0);
             for (DcMotorEx motor : motors) {
                 motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
@@ -165,7 +163,7 @@ public class ForwardVelocityTuner_PushBot extends OpMode {
             }
             average /= (double) velocities.size();
 
-            telemetryA.addData("forward velocity:", average);
+            telemetryA.addData("strafe velocity:", average);
             telemetryA.update();
         }
     }

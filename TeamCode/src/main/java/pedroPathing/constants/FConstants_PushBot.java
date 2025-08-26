@@ -6,26 +6,28 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class FConstants_PushBot {
     static {
-        FollowerConstants.localizers = Localizers.DRIVE_ENCODERS;
+        FollowerConstants.localizers = Localizers.OTOS;
 
-        FollowerConstants.leftFrontMotorName = "frontLeft";
-        FollowerConstants.leftRearMotorName = "backLeft";
-        FollowerConstants.rightFrontMotorName = "frontRight";
-        FollowerConstants.rightRearMotorName = "backRight";
+        FollowerConstants.leftFrontMotorName = "FL";
+        FollowerConstants.leftRearMotorName = "BL";
+        FollowerConstants.rightFrontMotorName = "FR";
+        FollowerConstants.rightRearMotorName = "BR";
 
         //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         // PushBot Needs Front Right & Back Left reversed
         // rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         FollowerConstants.leftFrontMotorDirection = DcMotorSimple.Direction.FORWARD;
-        FollowerConstants.leftRearMotorDirection = DcMotorSimple.Direction.REVERSE;
+        //FollowerConstants.leftRearMotorDirection = DcMotorSimple.Direction.REVERSE;
         FollowerConstants.rightFrontMotorDirection = DcMotorSimple.Direction.REVERSE;
-        FollowerConstants.rightRearMotorDirection = DcMotorSimple.Direction.FORWARD;
+        //FollowerConstants.rightRearMotorDirection = DcMotorSimple.Direction.FORWARD;
+        FollowerConstants.rightRearMotorDirection = DcMotorSimple.Direction.REVERSE;
+        FollowerConstants.leftRearMotorDirection = DcMotorSimple.Direction.FORWARD;
 
         FollowerConstants.mass = 7;
 
-        FollowerConstants.xMovement = 57.8741;
-        FollowerConstants.yMovement = 52.295;
+        FollowerConstants.xMovement = 79.7975;
+        FollowerConstants.yMovement = 48.0213;
 
         FollowerConstants.forwardZeroPowerAcceleration = -41.278;
         FollowerConstants.lateralZeroPowerAcceleration = -59.7819;

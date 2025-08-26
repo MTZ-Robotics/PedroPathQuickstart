@@ -48,14 +48,14 @@ import pedroPathing.constants.LConstants;
  * @version 1.0, 3/13/2024
  */
 @Config
-@Autonomous(name = "PushBot Forward Zero Power Acceleration Tuner", group = "Automatic Tuners")
-public class ForwardZeroPowerAccelerationTuner_PushBot extends OpMode {
+@Autonomous(name = "Inky Forward Zero Power Acceleration Tuner", group = "Automatic Tuners")
+public class ForwardZeroPowerAccelerationTuner_Inky extends OpMode {
     private ArrayList<Double> accelerations = new ArrayList<>();
 
-    private DcMotorEx FL;
-    private DcMotorEx BL;
-    private DcMotorEx FR;
-    private DcMotorEx BR;
+    private DcMotorEx leftFront;
+    private DcMotorEx leftRear;
+    private DcMotorEx rightFront;
+    private DcMotorEx rightRear;
     private List<DcMotorEx> motors;
 
     private PoseUpdater poseUpdater;
@@ -79,16 +79,16 @@ public class ForwardZeroPowerAccelerationTuner_PushBot extends OpMode {
         Constants.setConstants(FConstants.class, LConstants.class);
         poseUpdater = new PoseUpdater(hardwareMap);
 
-        FL = hardwareMap.get(DcMotorEx.class, leftFrontMotorName);
-        BL = hardwareMap.get(DcMotorEx.class, leftRearMotorName);
-        BR = hardwareMap.get(DcMotorEx.class, rightRearMotorName);
-        FR = hardwareMap.get(DcMotorEx.class, rightFrontMotorName);
-        FL.setDirection(leftFrontMotorDirection);
-        BL.setDirection(leftRearMotorDirection);
-        FR.setDirection(rightFrontMotorDirection);
-        BR.setDirection(rightRearMotorDirection);
+        leftFront = hardwareMap.get(DcMotorEx.class, leftFrontMotorName);
+        leftRear = hardwareMap.get(DcMotorEx.class, leftRearMotorName);
+        rightRear = hardwareMap.get(DcMotorEx.class, rightRearMotorName);
+        rightFront = hardwareMap.get(DcMotorEx.class, rightFrontMotorName);
+        leftFront.setDirection(leftFrontMotorDirection);
+        leftRear.setDirection(leftRearMotorDirection);
+        rightFront.setDirection(rightFrontMotorDirection);
+        rightRear.setDirection(rightRearMotorDirection);
 
-        motors = Arrays.asList(FL, BL, FR, BR);
+        motors = Arrays.asList(leftFront, leftRear, rightFront, rightRear);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();
@@ -114,10 +114,10 @@ public class ForwardZeroPowerAccelerationTuner_PushBot extends OpMode {
      */
     @Override
     public void start() {
-        FL.setPower(1);
-        BL.setPower(1);
-        FR.setPower(1);
-        BR.setPower(1);
+        leftFront.setPower(1);
+        leftRear.setPower(1);
+        rightFront.setPower(1);
+        rightRear.setPower(1);
     }
 
     /**
