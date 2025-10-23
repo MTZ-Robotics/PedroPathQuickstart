@@ -13,7 +13,9 @@ import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
 
 import pedroPathing.constants.FConstants;
+import pedroPathing.constants.FConstants_PushBot;
 import pedroPathing.constants.LConstants;
+import pedroPathing.constants.LConstants_PushBot;
 
 /**
  * This is the Circle autonomous OpMode. It runs the robot in a PathChain that's actually not quite
@@ -44,7 +46,7 @@ public class Circle extends OpMode {
     @Override
     public void init() {
         Constants.setConstants(FConstants.class, LConstants.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap, FConstants_PushBot.class, LConstants_PushBot.class);
 
         circle = follower.pathBuilder()
                 .addPath(new BezierCurve(new Point(0,0, Point.CARTESIAN), new Point(RADIUS,0, Point.CARTESIAN), new Point(RADIUS, RADIUS, Point.CARTESIAN)))

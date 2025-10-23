@@ -10,6 +10,7 @@ import com.pedropathing.pathgen.Point;
 import com.pedropathing.util.Constants;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -47,7 +48,7 @@ public class Circle_PushBot extends OpMode {
     @Override
     public void init() {
         Constants.setConstants(FConstants_PushBot.class, LConstants_PushBot.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap,FConstants_PushBot.class,LConstants_PushBot.class);
 
         circle = follower.pathBuilder()
                 .addPath(new BezierCurve(new Point(0,0, Point.CARTESIAN), new Point(RADIUS,0, Point.CARTESIAN), new Point(RADIUS, RADIUS, Point.CARTESIAN)))

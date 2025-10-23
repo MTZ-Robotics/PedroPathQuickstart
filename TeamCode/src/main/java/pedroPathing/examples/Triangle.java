@@ -14,7 +14,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import pedroPathing.constants.FConstants;
+import pedroPathing.constants.FConstants_PushBot;
 import pedroPathing.constants.LConstants;
+import pedroPathing.constants.LConstants_PushBot;
 
 
 /**
@@ -59,7 +61,7 @@ public class Triangle extends OpMode {
     @Override
     public void init() {
         Constants.setConstants(FConstants.class, LConstants.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap, FConstants_PushBot.class, LConstants_PushBot.class);
         follower.setStartingPose(startPose);
 
         triangle = follower.pathBuilder()

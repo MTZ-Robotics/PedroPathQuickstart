@@ -27,7 +27,7 @@ public class ExampleFieldCentricTeleop_pushBot extends OpMode {
     @Override
     public void init() {
         Constants.setConstants(FConstants_PushBot.class, LConstants_PushBot.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap,FConstants_PushBot.class,LConstants_PushBot.class);
         follower.setStartingPose(startPose);
     }
 

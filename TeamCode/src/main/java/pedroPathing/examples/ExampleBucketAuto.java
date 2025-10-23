@@ -13,7 +13,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import  com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import pedroPathing.constants.FConstants;
+import pedroPathing.constants.FConstants_PushBot;
 import pedroPathing.constants.LConstants;
+import pedroPathing.constants.LConstants_PushBot;
 
 /**
  * This is an example auto that showcases movement and control of two servos autonomously.
@@ -266,7 +268,7 @@ public class ExampleBucketAuto extends OpMode {
         opmodeTimer.resetTimer();
 
         Constants.setConstants(FConstants.class, LConstants.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap, FConstants_PushBot.class, LConstants_PushBot.class);
         follower.setStartingPose(startPose);
         buildPaths();
     }

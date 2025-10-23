@@ -58,6 +58,7 @@ import static pedroPathing.MTZ.mtzConstants_ItD.yellowWarningTime;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -68,13 +69,9 @@ import java.util.Objects;
 /****  Test Shooter with speed and trigger controls */
 
 public class TeleShooterTest extends LinearOpMode {
-    double topFlywheelRatio = 0.75;
-    double bottomFlywheelDesired = 0.9;
-    /********************************
-     * Timer Variables
-     ********************************/
-    private ElapsedTime endGameTimer;
-    boolean endGameStartElapsed;
+    double topFlywheelRatio = 1;
+    double bottomFlywheelDesired = 1;
+
     /*************************
      * Motor & Servo Variables
      *************************/
@@ -94,12 +91,12 @@ public class TeleShooterTest extends LinearOpMode {
     @Override
     //This is the default opMode call for generically running the opMode in this class directly from the phone without calling it from a super class
     public void runOpMode() throws InterruptedException{
-        endGameStartElapsed = false;
+
 
         bottomFlywheel = hardwareMap.dcMotor.get("m5");
         topFlywheel = hardwareMap.dcMotor.get("m6");
         bottomFlywheel.setDirection(DcMotor.Direction.REVERSE);
-        topFlywheel.setDirection(DcMotor.Direction.REVERSE);
+        topFlywheel.setDirection(DcMotor.Direction.FORWARD);
         bottomFlywheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         topFlywheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
@@ -148,8 +145,6 @@ public class TeleShooterTest extends LinearOpMode {
 //Telemetry Methods
     public void displayTelemetry() {
         telemetry.clearAll();
-        telemetry.addLine()
-                .addData("Timer: ", endGameTimer.toString());
             telemetry.addLine()
                     .addData("Bottom: ", bottomFlywheel.getPower());
             telemetry.addLine()

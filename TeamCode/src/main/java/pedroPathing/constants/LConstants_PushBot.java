@@ -22,7 +22,7 @@ public class LConstants_PushBot {
         OTOSConstants.linearUnit = DistanceUnit.INCH;
         OTOSConstants.angleUnit = AngleUnit.RADIANS;
         OTOSConstants.offset = new SparkFunOTOS.Pose2D(0, 0, Math.PI / 2);
-        OTOSConstants.linearScalar = 1.1629;
+        OTOSConstants.linearScalar = -29.3755;
         OTOSConstants.angularScalar = 1.0;
     }
 }

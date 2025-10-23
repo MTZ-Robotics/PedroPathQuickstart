@@ -13,7 +13,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+import pedroPathing.constants.FConstants;
 import pedroPathing.constants.FConstants_PushBot;
+import pedroPathing.constants.LConstants;
 import pedroPathing.constants.LConstants_PushBot;
 
 /**
@@ -50,7 +52,7 @@ public class StraightBackAndForth_Inky extends OpMode {
     @Override
     public void init() {
         Constants.setConstants(FConstants_PushBot.class, LConstants_PushBot.class);
-        follower = new Follower(hardwareMap);
+        follower = new Follower(hardwareMap, FConstants.class, LConstants.class);
 
         forwards = new Path(new BezierLine(new Point(0,0, Point.CARTESIAN), new Point(DISTANCE,0, Point.CARTESIAN)));
         forwards.setConstantHeadingInterpolation(0);
