@@ -1,13 +1,5 @@
 package pedroPathing.constants;
 
-import static pedroPathing.constants.mtzConstants_ItD_pushBot.ticksPerDegreeTurnChassis;
-import static pedroPathing.constants.mtzConstants_ItD_pushBot.ticksPerInchWheelDrive;
-import static pedroPathing.constants.mtzConstants_ItD_pushBot.ticksPerInchWheelStrafe;
-
-//import com.pedropathing.localization.OTOS;
-import com.pedropathing.localization.constants.DriveEncoderConstants;
-
-import com.pedropathing.localization.*;
 import com.pedropathing.localization.constants.*;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 

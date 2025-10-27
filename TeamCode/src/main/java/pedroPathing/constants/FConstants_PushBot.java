@@ -29,7 +29,7 @@ public class FConstants_PushBot {
         FollowerConstants.xMovement = 79.7975;
         FollowerConstants.yMovement = 48.0213;
 
-        FollowerConstants.forwardZeroPowerAcceleration = -41.278;
+        FollowerConstants.forwardZeroPowerAcceleration = -222.3323;
         FollowerConstants.lateralZeroPowerAcceleration = -59.7819;
 
         FollowerConstants.translationalPIDFCoefficients.setCoefficients(0.1,0,0.01,0);

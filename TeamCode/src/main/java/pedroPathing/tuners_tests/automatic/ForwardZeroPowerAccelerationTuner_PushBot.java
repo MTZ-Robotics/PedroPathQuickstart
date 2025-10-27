@@ -30,7 +30,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import pedroPathing.constants.FConstants;
+import pedroPathing.constants.FConstants_PushBot;
 import pedroPathing.constants.LConstants;
+import pedroPathing.constants.LConstants_PushBot;
 
 /**
  * This is the ForwardZeroPowerAccelerationTuner autonomous follower OpMode. This runs the robot
@@ -76,7 +78,7 @@ public class ForwardZeroPowerAccelerationTuner_PushBot extends OpMode {
      */
     @Override
     public void init() {
-        Constants.setConstants(FConstants.class, LConstants.class);
+        Constants.setConstants(FConstants_PushBot.class, LConstants_PushBot.class);
         poseUpdater = new PoseUpdater(hardwareMap);
 
         FL = hardwareMap.get(DcMotorEx.class, leftFrontMotorName);
